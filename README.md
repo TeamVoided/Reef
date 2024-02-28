@@ -1,2 +1,2 @@
-# The TeamVoided Template
-Template mod by TeamVoided
+# The Reef
+Reef mod is a world gen lib

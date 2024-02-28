@@ -1,19 +1,19 @@
-package org.teamvoided.template
+package org.teamvoided.reef
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.registry.RegistrySetBuilder
-import org.teamvoided.template.Template.log
+import org.teamvoided.reef.Reef.log
 
-class TemplateData : DataGeneratorEntrypoint {
+class ReefData : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
         log.info("Hello from DataGen")
         val pack = gen.createPack()
 
-//        pack.addProvider(::TemplateWorldGenerator)
+//        pack.addProvider(::ReefWorldGenerator)
     }
 
     override fun buildRegistry(gen: RegistrySetBuilder) {
-//        gen.add(RegistryKeys.BIOME, TemplateBiomes::boostrap)
+//        gen.add(RegistryKeys.BIOME, ReefBiomes::boostrap)
     }
 }

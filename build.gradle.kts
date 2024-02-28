@@ -10,7 +10,7 @@ plugins {
 group = project.properties["maven_group"]!!
 version = project.properties["mod_version"]!!
 base.archivesName.set(project.properties["archives_base_name"] as String)
-description = "TeamVoided Template"
+description = "Reef desc"
 val modid: String by project
 
 repositories {
@@ -19,13 +19,13 @@ repositories {
 
 modSettings {
     modId(modid)
-    modName("Team Voided Template")
+    modName("Reef")
 
-    entrypoint("main", "org.teamvoided.template.Template::commonInit")
-    entrypoint("client", "org.teamvoided.template.Template::clientInit")
-    entrypoint("fabric-datagen", "org.teamvoided.template.TemplateData")
-    mixinFile("template.mixins.json")
-//    accessWidener("template.accesswidener")
+    entrypoint("main", "org.teamvoided.reef.Reef::commonInit")
+    entrypoint("client", "org.teamvoided.reef.Reef::clientInit")
+    entrypoint("fabric-datagen", "org.teamvoided.reef.ReefData")
+    mixinFile("reef.mixins.json")
+//    accessWidener("reef.accesswidener")
 }
 
 //val player_data: String by project
