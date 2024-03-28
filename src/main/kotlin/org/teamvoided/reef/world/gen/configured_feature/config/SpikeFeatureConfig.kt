@@ -18,7 +18,7 @@ data class SpikeFeatureConfig(
 
 ) : FeatureConfig {
     companion object {
-        val CODEC =
+        val CODEC: Codec<SpikeFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SpikeFeatureConfig> ->
                 instance.group(
                     Codec.INT.fieldOf("chance_for_long_spike").orElse(60).forGetter { it.chanceForLongSpike },

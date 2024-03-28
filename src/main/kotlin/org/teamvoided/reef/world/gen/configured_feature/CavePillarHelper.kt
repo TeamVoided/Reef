@@ -99,7 +99,7 @@ object CavePillarHelper {
         return canReplace(state) || state.isOf(Blocks.LAVA)
     }
 
-    fun canReplace(state: BlockState): Boolean {
+    private fun canReplace(state: BlockState): Boolean {
         return  true
 //        state.isIn(DuskBlockTags.CAVE_PILLAR_REPLACEABLE)
     }

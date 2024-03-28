@@ -9,6 +9,7 @@ import org.teamvoided.reef.world.gen.configured_feature.*
 import org.teamvoided.reef.world.gen.configured_feature.config.*
 
 
+@Suppress("unused")
 object ReefFeatures {
 
     val SPIKE = register("spike", SpikeFeature(SpikeFeatureConfig.CODEC))

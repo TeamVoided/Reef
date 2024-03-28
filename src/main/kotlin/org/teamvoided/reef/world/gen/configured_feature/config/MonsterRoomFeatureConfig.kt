@@ -1,5 +1,6 @@
 package org.teamvoided.reef.world.gen.configured_feature.config
 
+import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.entity.EntityType
 import net.minecraft.registry.Registries
@@ -14,7 +15,7 @@ data class MonsterRoomFeatureConfig(
     val lootTable: Identifier
     ) : FeatureConfig {
     companion object {
-        val CODEC =
+        val CODEC: Codec<MonsterRoomFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<MonsterRoomFeatureConfig> ->
                 instance.group(
                     BlockStateProvider.TYPE_CODEC.fieldOf("base_block").forGetter { it.primaryBlock },

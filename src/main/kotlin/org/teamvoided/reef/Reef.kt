@@ -7,7 +7,7 @@ import org.teamvoided.reef.init.ReefFeatures
 
 @Suppress("unused")
 object Reef {
-    const val MODID = "reef"
+    private const val MODID = "reef"
 
     @JvmField
     val log: Logger = LoggerFactory.getLogger(Reef::class.simpleName)
