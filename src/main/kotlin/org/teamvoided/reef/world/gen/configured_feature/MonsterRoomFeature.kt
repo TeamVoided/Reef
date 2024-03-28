@@ -106,8 +106,8 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
         block6@ while (s < 2) {
             t = 0
             while (t < 3) {
-                var w: Int
-                var v: Int
+                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE") var w: Int
+                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE") var v: Int
                 u = blockPos.x + random.nextInt(j * 2 + 1) - j
                 val blockPos3 = BlockPos(
                     u,
