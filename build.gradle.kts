@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    `maven-publish`
     id("fabric-loom") version "1.5.6"
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.serialization") version "1.9.22"
@@ -71,5 +72,24 @@ tasks {
     java {
         toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
         withSourcesJar()
+    }
+}
+
+
+publishing {
+    repositories {
+        maven("https://teamvoided.org/releases") {
+            name = "TeamVoided"
+            credentials {
+                username = ( System.getenv("USERNAME") ?: "NaN").toString()
+                password = (System.getenv("TOKEN") ?: "NaN").toString()
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("funny") {
+            artifactId = "reef"
+            from(components["java"])
+        }
     }
 }

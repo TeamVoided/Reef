@@ -13,12 +13,12 @@ object Reef {
     val log: Logger = LoggerFactory.getLogger(Reef::class.simpleName)
 
     fun commonInit() {
-        log.info("Adding coral to your Crabs.")
+        log.info("Adding coral to your Worlds!")
         ReefFeatures.init()
     }
 
     fun clientInit() {
-        log.info("This is marine invertebrates takeover")
+        log.info("This is marine invertebrate takeover!")
     }
 
     fun id(path: String) = Identifier(MODID, path)
