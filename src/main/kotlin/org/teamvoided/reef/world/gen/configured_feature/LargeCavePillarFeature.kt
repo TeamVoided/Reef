@@ -89,6 +89,7 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
         private val baseScale: Int
             get() = this.scale(0.0f)
 
+        @Suppress("unused")
         private val bottomY: Int
             get() {
                 if (this.isStalagmite) {
@@ -97,6 +98,7 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
                 return pos.y - this.baseScale
             }
 
+        @Suppress("unused")
         private val topY: Int
             get() {
                 if (!this.isStalagmite) {
