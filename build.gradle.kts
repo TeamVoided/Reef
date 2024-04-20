@@ -1,39 +1,46 @@
+@file:Suppress("PropertyName", "VariableNaming")
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    `maven-publish`
-    id("fabric-loom") version "1.5.6"
-    kotlin("jvm") version "1.9.22"
-    kotlin("plugin.serialization") version "1.9.22"
-    id("org.teamvoided.iridium") version "3.1.9"
+    alias(libs.plugins.fabric.loom)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.iridium)
+    alias(libs.plugins.iridium.publish)
+    alias(libs.plugins.iridium.upload)
 }
 
-group = project.properties["maven_group"]!!
-version = project.properties["mod_version"]!!
-base.archivesName.set(project.properties["archives_base_name"] as String)
-description = "Reef desc"
+group = property("maven_group")!!
+version = property("mod_version")!!
+base.archivesName.set(property("archives_base_name") as String)
+description = property("description") as String
+
 val modid: String by project
+val mod_name: String by project
+val modrinth_id: String? by project
+val curse_id: String? by project
 
 repositories {
+    maven("https://teamvoided.org/releases")
     mavenCentral()
 }
 
 modSettings {
     modId(modid)
-    modName("Reef")
+    modName(mod_name)
 
     entrypoint("main", "org.teamvoided.reef.Reef::commonInit")
     entrypoint("client", "org.teamvoided.reef.Reef::clientInit")
-    entrypoint("fabric-datagen", "org.teamvoided.reef.ReefData")
-    mixinFile("reef.mixins.json")
-//    accessWidener("reef.accesswidener")
+    entrypoint("fabric-datagen", "org.teamvoided.reef.data.gen.ReefData")
+    mixinFile("$modid.mixins.json")
+//    accessWidener("$modid.accesswidener")
 }
 
-//val player_data: String by project
 dependencies {
     modImplementation(fileTree("libs"))
+    modImplementation(libs.farrow)
 
-//    modImplementation(include("eu.pb4", "player-data-api", player_data))
 }
 
 loom {
@@ -75,21 +82,21 @@ tasks {
     }
 }
 
+publishScript {
+    releaseRepository("TeamVoided", "https://maven.teamvoided.org/releases")
+    publication(modSettings.modId(), false)
+    publishSources(true)
+}
 
-publishing {
-    repositories {
-        maven("https://teamvoided.org/releases") {
-            name = "TeamVoided"
-            credentials {
-                username = ( System.getenv("USERNAME") ?: "NaN").toString()
-                password = (System.getenv("TOKEN") ?: "NaN").toString()
-            }
-        }
-    }
-    publications {
-        create<MavenPublication>("funny") {
-            artifactId = "reef"
-            from(components["java"])
-        }
-    }
+uploadConfig {
+//    debugMode = true
+    modrinthId = modrinth_id
+    curseId = curse_id
+
+    // FabricApi
+    modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
+    curseDependency("fabric-api", uploadConfig.REQUIRED)
+    // Fabric Language Kotlin
+    modrinthDependency("Ha28R6CL", uploadConfig.REQUIRED)
+    curseDependency("fabric-language-kotlin", uploadConfig.REQUIRED)
 }

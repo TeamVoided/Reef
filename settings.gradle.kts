@@ -1,3 +1,4 @@
+rootProject.name = "Reef"
 pluginManagement {
     repositories {
         maven("https://maven.fabricmc.net/") {
@@ -8,6 +9,10 @@ pluginManagement {
         maven("https://maven.teamvoided.org/releases")
     }
 }
-
-rootProject.name = "Reef"
-
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("libs.versions.toml"))
+        }
+    }
+}
