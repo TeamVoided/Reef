@@ -5,6 +5,8 @@ import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.MobSpawnerBlockEntity
 import net.minecraft.inventory.LootableInventory
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.structure.piece.StructurePiece
 import net.minecraft.util.Util
@@ -133,7 +135,9 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
                     StructurePiece.orientateChest(world, blockPos3, Blocks.CHEST.defaultState), predicate
                 )
                 // LootTables.SIMPLE_DUNGEON_CHEST
-                LootableInventory.setupLootTable(world, random, blockPos3, config.lootTable)
+                LootableInventory.setupLootTable(
+                    world, random, blockPos3, RegistryKey.of(RegistryKeys.LOOT_TABLE, config.lootTable)
+                )
                 ++s
                 continue@block6
                 ++t

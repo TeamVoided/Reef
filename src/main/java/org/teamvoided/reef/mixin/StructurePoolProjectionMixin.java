@@ -33,7 +33,7 @@ public class StructurePoolProjectionMixin {
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void clInit(CallbackInfo ci) {
-        register("SEAFLOOR_MATCHING" , "seafloor_matching", ImmutableList.of(new GravityStructureProcessor(Heightmap.Type.OCEAN_FLOOR_WG, -1)));
+        register("SEAFLOOR_MATCHING", "seafloor_matching", ImmutableList.of(new GravityStructureProcessor(Heightmap.Type.OCEAN_FLOOR_WG, -1)));
     }
 
     @Invoker("<init>")
@@ -47,6 +47,6 @@ public class StructurePoolProjectionMixin {
         StructurePool.Projection type = invokeInit(name, values.get(values.size() - 1).ordinal() + 1, id, processors);
         values.add(type);
         field_16683 = values.toArray(new StructurePool.Projection[]{});
-        CODEC = StringIdentifiable.createCodec(()->field_16683);
+        CODEC = StringIdentifiable.createEnumCodec(() -> field_16683);
     }
 }

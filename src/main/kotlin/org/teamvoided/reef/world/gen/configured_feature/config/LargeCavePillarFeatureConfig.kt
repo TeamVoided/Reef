@@ -31,7 +31,7 @@ data class LargeCavePillarFeatureConfig(
                     .group(
                         Codec.intRange(1, 512).fieldOf("floor_to_ceiling_search_range").orElse(30)
                             .forGetter { it.floorToCeilingSearchRange },
-                        IntProvider.create(1, 60).fieldOf("column_radius").forGetter { it.columnRadius },
+                        IntProvider.method_35004(1, 60).fieldOf("column_radius").forGetter { it.columnRadius },
                         FloatProvider.createValidatedCodec(0.0f, 20.0f).fieldOf("height_scale")
                             .forGetter { it.heightScale },
                         Codec.floatRange(0.1f, 1.0f).fieldOf("max_column_radius_to_cave_height_ratio")
