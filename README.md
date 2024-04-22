@@ -6,8 +6,8 @@ Library that extends vanilla worldgen by providing alternatives to unmodifiable 
 
 The main goal of Reef is to take vanilla world gen and make it configurable. The way we want to achieve this is by
 not changing vanilla, but adding to it. So let's say we want to be able to customize the Ice Spike feature, the way Reef
-approaches this is by creating a new identical feature that is fully customizable. So there is no need for dirty mixins and
-breaking compatibility with other mods. This is not possible in all cases of course, and in those cases we will take
+approaches this is by creating a new identical feature that is fully customizable. So there is no need for dirty mixins
+and breaking compatibility with other mods. This is not possible in all cases of course, and in those cases we will take
 the least intrusive option.
 
 ## What Does the mod do?
@@ -20,17 +20,17 @@ section about this.)
 ## Contents
 
 - Custom Features:
-  - Spike ("Ice Spike" Feature, but customizable)
-  - Inverted Spike ("Spike" Feature, but is upside down)
-  - Monster Room ("Dungeon" Feature, but customizable)
-  - Structure Piece (Similar to "Fossil" Feature, but with no forced height offset)
-  - Large Cave Pillar ("Large Dripstone", but customizable)
-  - Feature List (Places all features in a list)
+    - Spike ("Ice Spike" Feature, but customizable)
+    - Inverted Spike ("Spike" Feature, but is upside down)
+    - Monster Room ("Dungeon" Feature, but customizable)
+    - Structure Piece (Similar to "Fossil" Feature, but with no forced height offset)
+    - Large Cave Pillar ("Large Dripstone", but customizable)
+    - Feature List (Places all features in a list)
 - Custom Tags:
-  - `has_eroded_pillar` (Will apply the Eroded Badlands Surface Builder, which has been tweaked to use OCEAN_FLOOR_WG)
-  - `has_iceberg` (Will apply the Iceberg Surface Builder)
+    - `has_eroded_pillar` (Will apply the Eroded Badlands Surface Builder, which has been tweaked to use OCEAN_FLOOR_WG)
+    - `has_iceberg` (Will apply the Iceberg Surface Builder)
 - StructurePool Projections:
-  - `SEAFLOOR_MATCHING` (Adds seafloor matching projection. See warning section about this.)
+    - `SEAFLOOR_MATCHING` (Adds seafloor matching projection. See warning section about this.)
 
 ## Future of the lib
 
@@ -58,8 +58,6 @@ Please don't use it for anything, but testing.
 
 All the current features were made quickly and very messily for a world gen mod we were working on. They have not been
 property cleaned up and optimized. So do expect them to change, both as features and their configs.
-The future vision for this mod is that the features that are modified version of vanilla ones. Act exactly like vanilla
-ones but have the ability to be configured (And optimized where possible).
 
 ## Wiki
 
