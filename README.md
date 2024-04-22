@@ -4,9 +4,9 @@ Library that extends vanilla worldgen by providing alternatives to unmodifiable 
 
 ## What is the goal of the mod?
 
-The main goal of Reef is to take vanilla world gen and make them configurable. And the way we want to achieve this is by
-not change vanilla, but adding to it. So let's say we want to be able to customize the Ice Spike feature, and the way Reef
-approaches this by creative a new identical feature that is fully customizable. So there is no need for dirty mixins and
+The main goal of Reef is to take vanilla world gen and make it configurable. The way we want to achieve this is by
+not changing vanilla, but adding to it. So let's say we want to be able to customize the Ice Spike feature, the way Reef
+approaches this is by creating a new identical feature that is fully customizable. So there is no need for dirty mixins and
 breaking compatibility with other mods. This is not possible in all cases of course, and in those cases we will take
 the least intrusive option.
 
