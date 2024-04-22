@@ -27,14 +27,14 @@ section about this.)
   - Large Cave Pillar ("Large Dripstone", but customizable)
   - Feature List (Places all features in a list)
 - Custom Tags:
-  - `has_eroded_pillar` (Will apply the Eroded Badlands Surface Builder, has been tweaked to use OCEAN_FLOOR_WG)
+  - `has_eroded_pillar` (Will apply the Eroded Badlands Surface Builder, which has been tweaked to use OCEAN_FLOOR_WG)
   - `has_iceberg` (Will apply the Iceberg Surface Builder)
 - StructurePool Projections:
   - `SEAFLOOR_MATCHING` (Adds seafloor matching projection. See warning section about this.)
 
 ## Future of the lib
 
-While this lib is only in the early stages of development. We already have plans to Fully deprecate this mod. Since This
+While this lib is only in the early stages of development. We already have plans to fully deprecate this mod. Since This
 is planned to be just one module from our future mod `VoidLib`.
 
 ### Why?
