@@ -21,5 +21,5 @@ object Reef {
         log.info("This is marine invertebrate takeover!")
     }
 
-    fun id(path: String) = Identifier(MODID, path)
+    fun id(path: String) = Identifier.method_60655(MODID, path)
 }
