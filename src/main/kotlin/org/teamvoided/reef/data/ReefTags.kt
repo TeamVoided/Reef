@@ -9,11 +9,14 @@ import org.teamvoided.reef.Reef.id
 object ReefTags {
     @JvmField
     val HAS_ERODED_PILLAR = biomeTag("has_eroded_pillar")
+
+    @JvmField
+    val HAS_VANILLA_ERODED_PILLAR = biomeTag("has_vanilla_eroded_pillar")
+
     @JvmField
     val HAS_ICEBERG = biomeTag("has_iceberg")
 
 
     private fun biomeTag(id: String): TagKey<Biome> = TagKey.of(RegistryKeys.BIOME, id(id))
     fun create(id: String): TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id(id))
-
 }

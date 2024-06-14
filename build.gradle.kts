@@ -1,5 +1,6 @@
 @file:Suppress("PropertyName", "VariableNaming")
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -13,28 +14,23 @@ plugins {
 
 group = property("maven_group")!!
 version = property("mod_version")!!
-base.archivesName.set(property("archives_base_name") as String)
-description = property("description") as String
+base.archivesName.set(modSettings.modId())
 
-val modid: String by project
-val mod_name: String by project
 val modrinth_id: String? by project
 val curse_id: String? by project
 
 repositories {
     maven("https://teamvoided.org/releases")
     mavenCentral()
+    mavenLocal()
 }
 
 modSettings {
-    modId(modid)
-    modName(mod_name)
-
     entrypoint("main", "org.teamvoided.reef.Reef::commonInit")
     entrypoint("client", "org.teamvoided.reef.Reef::clientInit")
     entrypoint("fabric-datagen", "org.teamvoided.reef.data.gen.ReefData")
-    mixinFile("$modid.mixins.json")
-//    accessWidener("$modid.accesswidener")
+    mixinFile("${modId()}.mixins.json")
+//    accessWidener("${modId()}.accesswidener")
 }
 
 dependencies {
@@ -50,7 +46,7 @@ loom {
             ideConfigGenerated(true)
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
-            vmArg("-Dfabric-api.datagen.modid=${modid}")
+            vmArg("-Dfabric-api.datagen.modid=${modSettings.modId()}")
             runDir("build/datagen")
         }
 
@@ -73,12 +69,20 @@ tasks {
     }
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = targetJavaVersion.toString()
+        compilerOptions.jvmTarget = JvmTarget.JVM_21
     }
 
     java {
         toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
         withSourcesJar()
+    }
+    jar {
+        val valTaskNames = gradle.startParameter.taskNames
+        if (!valTaskNames.contains("runDataGen")) {
+            exclude("org/teamvoided/reef/data/gen/*")
+        } else {
+            println("Running datagen for task ${valTaskNames.joinToString(" ")}")
+        }
     }
 }
 

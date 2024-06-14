@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture
 class BiomeTagGen(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider<Biome>(output, RegistryKeys.BIOME, registriesFuture) {
     override fun configure(arg: HolderLookup.Provider?) {
-        getOrCreateTagBuilder(ReefTags.HAS_ERODED_PILLAR)
+        getOrCreateTagBuilder(ReefTags.HAS_VANILLA_ERODED_PILLAR)
             .add(Biomes.ERODED_BADLANDS)
         getOrCreateTagBuilder(ReefTags.HAS_ICEBERG)
             .add(Biomes.FROZEN_OCEAN)
