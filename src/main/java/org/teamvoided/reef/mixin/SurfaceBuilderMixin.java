@@ -19,6 +19,7 @@ import net.minecraft.world.gen.chunk.BlockColumn;
 import net.minecraft.world.gen.chunk.ChunkNoiseSampler;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceRules;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.teamvoided.reef.data.ReefTags;
 
-//@Debug(export = true)
+@Debug(export = true)
 @Mixin(SurfaceBuilder.class)
 public abstract class SurfaceBuilderMixin {
 	@Final
@@ -47,18 +48,17 @@ public abstract class SurfaceBuilderMixin {
 	@Shadow
 	private int seaLevel;
 
-
 	@Redirect(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Holder;isRegistryKey(Lnet/minecraft/registry/RegistryKey;)Z"))
 	private boolean unHardCodedSurfaceBuilders(Holder<Biome> biome, RegistryKey<Biome> biomeKey) {
-		if (biomeKey == Biomes.ERODED_BADLANDS) return biome.isIn(ReefTags.HAS_VANILLA_ERODED_PILLAR);
+		if (biomeKey == Biomes.ERODED_BADLANDS) return biome.isIn(ReefTags.HAS_ERODED_PILLAR);
 		else if (biomeKey == Biomes.FROZEN_OCEAN || biomeKey == Biomes.DEEP_FROZEN_OCEAN)
 			return biome.isIn(ReefTags.HAS_ICEBERG);
 		else return biome.isRegistryKey(biomeKey);
 	}
 
-	@Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/surfacebuilder/SurfaceRules$Context;updateHorizontalContext(II)V"))
-	private void customErodedBadlandsPillar(RandomState randomState, BiomeAccess biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, HeightContext context, Chunk chunk, ChunkNoiseSampler chunkNoiseSampler, SurfaceRules.MaterialRule surfaceRule,
-											CallbackInfo ci, @Local Holder<Biome> biome, @Local(ordinal = 2) int x, @Local(ordinal = 3) int z, @Local BlockColumn chunkBlockColumn) {
+	@Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;sampleHeightmap(Lnet/minecraft/world/Heightmap$Type;II)I", ordinal = 1))
+	private void customErodedBadlandsPillar(RandomState randomState, BiomeAccess biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, HeightContext context, Chunk chunk, ChunkNoiseSampler chunkNoiseSampler, SurfaceRules.MaterialRule surfaceRule, CallbackInfo ci,
+											@Local Holder<Biome> biome, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
 		if (biome.isIn(ReefTags.HAS_ERODED_PILLAR)) {
 			int y = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x, z) + 1;
 			double sn = this.badlandsSurfaceNoise.sample(x, 0.0, z);

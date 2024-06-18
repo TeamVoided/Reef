@@ -76,14 +76,14 @@ tasks {
         toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
         withSourcesJar()
     }
-    jar {
-        val valTaskNames = gradle.startParameter.taskNames
-        if (!valTaskNames.contains("runDataGen")) {
-            exclude("org/teamvoided/reef/data/gen/*")
-        } else {
-            println("Running datagen for task ${valTaskNames.joinToString(" ")}")
-        }
-    }
+//    jar {
+//        val valTaskNames = gradle.startParameter.taskNames
+//        if (!valTaskNames.contains("runDataGen")) {
+//            exclude("org/teamvoided/reef/data/gen/*")
+//        } else {
+//            println("Running datagen for task ${valTaskNames.joinToString(" ")}")
+//        }
+//    }
 }
 
 publishScript {
@@ -96,6 +96,9 @@ uploadConfig {
 //    debugMode = true
     modrinthId = modrinth_id
     curseId = curse_id
+
+    changeLog = "- 21.x update\n" +
+            "- added new has_vanilla_badlands_pillar tag so the mod doesnt override vanilla behaviour anymore"
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
