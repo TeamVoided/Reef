@@ -97,8 +97,7 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = "- 21.x update\n" +
-            "- added new has_vanilla_badlands_pillar tag so the mod doesnt override vanilla behaviour anymore"
+    changeLog = "- fixed z-lands bug with eroded pillar tag"
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
