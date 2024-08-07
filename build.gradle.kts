@@ -21,25 +21,30 @@ val curse_id: String? by project
 
 repositories {
     maven("https://teamvoided.org/releases")
+    maven("https://maven.terraformersmc.com/") { name = "TerraformersMC" }
     mavenCentral()
     mavenLocal()
 }
 
 modSettings {
     entrypoint("main", "org.teamvoided.reef.Reef::commonInit")
-    entrypoint("client", "org.teamvoided.reef.Reef::clientInit")
+//    entrypoint("client", "org.teamvoided.reef.Reef::clientInit")
     entrypoint("fabric-datagen", "org.teamvoided.reef.data.gen.ReefData")
+
     mixinFile("${modId()}.mixins.json")
 //    accessWidener("${modId()}.accesswidener")
 }
 
 dependencies {
     modImplementation(fileTree("libs"))
-    modImplementation(libs.farrow)
+    modImplementation(libs.modmenu)
 
+    modCompileOnly("${libs.emi.get()}:api")
+    modLocalRuntime(libs.emi)
 }
 
 loom {
+    splitEnvironmentSourceSets()
     runs {
         create("DataGen") {
             client()

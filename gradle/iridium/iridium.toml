@@ -2,12 +2,12 @@ projectTitle = "Reef"
 modId = "reef"
 githubRepo = "Teamvoided/Reef"
 discordServerInviteId = "KZ5Q364hEg"
-authors = [ "brokenfuse", "theendercore","duskautumnstorm" ]
+authors = [ "TheEnderCore","DuskAutumnStorm" ]
 majorMinecraftVersion = "1.21"
 minecraftVersion = "1.21"
 fabricLoaderVersion = "0.15.11"
-fabricApiVersion = "0.100.1+1.21"
-fabricLangKotlinVersion = "1.11.0+kotlin.2.0.0"
+fabricApiVersion = "0.101.2+1.21"
+fabricLangKotlinVersion = "1.12.0+kotlin.2.0.10"
 license = "MIT"
 modules = [ ]
 modDescription = "Library that extends vanilla worldgen by providing alternatives to unmodifiable features"
@@ -25,4 +25,4 @@ disableKotlin = false
     # MOJYARN: Yarn layered on top of the official Mojang mappings
     # CUSTOM: Custom mapping jar. Uses mappings version as file location
     type = "QUILT"
-    version = "1.21+build.2"
+    version = "1.21+build.18"

@@ -17,9 +17,9 @@ object Reef {
         ReefFeatures.init()
     }
 
-    fun clientInit() {
+  /*  fun clientInit() {
         log.info("This is marine invertebrate takeover!")
-    }
+    }*/
 
     fun id(path: String) = Identifier.of(MODID, path)
 }

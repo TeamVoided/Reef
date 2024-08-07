@@ -147,7 +147,7 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
         this.setBlockStateIf(world, blockPos, Blocks.SPAWNER.defaultState, predicate)
         val blockEntity = world.getBlockEntity(blockPos)
         if (blockEntity is MobSpawnerBlockEntity) {
-            blockEntity.method_46408(Util.getRandom(config.monsterType, random), random)
+            blockEntity.setEntityType(Util.getRandom(config.monsterType, random), random)
         } else {
             log.error("Failed to fetch mob spawner entity at ({}, {}, {})", blockPos.x, blockPos.y, blockPos.z)
         }
