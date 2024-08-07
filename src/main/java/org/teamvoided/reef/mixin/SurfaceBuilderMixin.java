@@ -27,8 +27,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.teamvoided.reef.api.events.CustomSurfaceBuilder;
 import org.teamvoided.reef.data.ReefTags;
-import org.teamvoided.reef.events.CustomSurfaceBuilder;
 
 @Debug(export = true)
 @Mixin(SurfaceBuilder.class)
@@ -50,7 +50,7 @@ public abstract class SurfaceBuilderMixin {
     private int seaLevel;
 
     @Redirect(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Holder;isRegistryKey(Lnet/minecraft/registry/RegistryKey;)Z"))
-    private boolean reef$tagedVanillaSurfaceBuilders(Holder<Biome> biome, RegistryKey<Biome> biomeKey) {
+    private boolean reef$taggedVanillaSurfaceBuilders(Holder<Biome> biome, RegistryKey<Biome> biomeKey) {
         if (biomeKey == Biomes.ERODED_BADLANDS) return biome.isIn(ReefTags.HAS_ERODED_PILLAR);
         else if (biomeKey == Biomes.FROZEN_OCEAN || biomeKey == Biomes.DEEP_FROZEN_OCEAN)
             return biome.isIn(ReefTags.HAS_ICEBERG);
@@ -60,7 +60,7 @@ public abstract class SurfaceBuilderMixin {
     @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;sampleHeightmap(Lnet/minecraft/world/Heightmap$Type;II)I", ordinal = 1))
     private void reef$customSurfaceBuildersBefore(RandomState randomState, BiomeAccess biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, HeightContext context, Chunk chunk, ChunkNoiseSampler chunkNoiseSampler, SurfaceRules.MaterialRule surfaceRule, CallbackInfo ci,
                                                   @Local Holder<Biome> biome, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
-        CustomSurfaceBuilder.PRE_VANILLA.invoker().register(defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
+        CustomSurfaceBuilder.PRE_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
 
         // Move this to kotlin in the future
         if (biome.isIn(ReefTags.HAS_ERODED_PILLAR)) {
@@ -84,7 +84,7 @@ public abstract class SurfaceBuilderMixin {
     @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/surfacebuilder/SurfaceBuilder;buildFrozenOceanSpecificSurface(ILnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/chunk/BlockColumn;Lnet/minecraft/util/math/BlockPos$Mutable;III)V", shift = At.Shift.BY, by = 2))
     private void reef$customSurfaceBuildersAfter(RandomState randomState, BiomeAccess biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, HeightContext context, Chunk chunk, ChunkNoiseSampler chunkNoiseSampler, SurfaceRules.MaterialRule surfaceRule,
                                                  CallbackInfo ci, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
-        CustomSurfaceBuilder.POST_VANILLA.invoker().register(defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
+        CustomSurfaceBuilder.POST_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
 
     }
 }
