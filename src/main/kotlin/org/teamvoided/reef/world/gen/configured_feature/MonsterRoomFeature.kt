@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext
 import org.teamvoided.reef.Reef.log
 import org.teamvoided.reef.world.gen.configured_feature.config.MonsterRoomFeatureConfig
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "ComplexCondition", "MagicNumber")
 class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
     Feature<MonsterRoomFeatureConfig>(codec) {
     override fun place(context: FeatureContext<MonsterRoomFeatureConfig>): Boolean {
