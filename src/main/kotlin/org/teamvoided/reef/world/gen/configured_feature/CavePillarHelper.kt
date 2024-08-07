@@ -100,7 +100,7 @@ object CavePillarHelper {
     }
 
     private fun canReplace(@Suppress("UNUSED_PARAMETER") state: BlockState): Boolean {
-        return  true
+        return true
 //        state.isIn(DuskBlockTags.CAVE_PILLAR_REPLACEABLE)
     }
 

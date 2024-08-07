@@ -13,7 +13,7 @@ data class MonsterRoomFeatureConfig(
     val secondaryBlock: BlockStateProvider,
     val monsterType: List<EntityType<*>>,
     val lootTable: Identifier
-    ) : FeatureConfig {
+) : FeatureConfig {
     companion object {
         val CODEC: Codec<MonsterRoomFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<MonsterRoomFeatureConfig> ->
