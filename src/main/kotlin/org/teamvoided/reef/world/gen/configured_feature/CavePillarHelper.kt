@@ -10,7 +10,7 @@ import kotlin.math.ln
 import kotlin.math.max
 import kotlin.math.pow
 
-@Suppress("unused")
+@Suppress("unused", "MagicNumber")
 object CavePillarHelper {
     fun scaleHeightFromRadius(radius: Double, scale: Double, heightScale: Double, bluntness: Double): Double {
         val r = if (radius < bluntness) bluntness else radius

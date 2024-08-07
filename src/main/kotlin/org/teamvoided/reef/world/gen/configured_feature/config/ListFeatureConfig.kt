@@ -25,5 +25,4 @@ data class ListFeatureConfig(
                 ).apply(instance, ::ListFeatureConfig)
             }
     }
-
 }
