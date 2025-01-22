@@ -53,7 +53,7 @@ public abstract class SurfaceBuilderMixin {
     private boolean reef$taggedVanillaSurfaceBuilders(Holder<Biome> biome, RegistryKey<Biome> biomeKey) {
         if (biomeKey == Biomes.ERODED_BADLANDS) return biome.isIn(ReefTags.HAS_ERODED_PILLAR);
         else if (biomeKey == Biomes.FROZEN_OCEAN || biomeKey == Biomes.DEEP_FROZEN_OCEAN)
-            return biome.isIn(ReefTags.HAS_ICEBERG);
+            return biome.isIn(ReefTags.HAS_VANILLA_ICEBERG);
         else return biome.isRegistryKey(biomeKey);
     }
 
@@ -81,7 +81,7 @@ public abstract class SurfaceBuilderMixin {
         }
     }
 
-    @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/surfacebuilder/SurfaceBuilder;buildFrozenOceanSpecificSurface(ILnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/chunk/BlockColumn;Lnet/minecraft/util/math/BlockPos$Mutable;III)V", shift = At.Shift.BY, by = 2))
+    @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Holder;isRegistryKey(Lnet/minecraft/registry/RegistryKey;)Z", ordinal = 1))
     private void reef$customSurfaceBuildersAfter(RandomState randomState, BiomeAccess biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, HeightContext context, Chunk chunk, ChunkNoiseSampler chunkNoiseSampler, SurfaceRules.MaterialRule surfaceRule,
                                                  CallbackInfo ci, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
         CustomSurfaceBuilder.POST_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);

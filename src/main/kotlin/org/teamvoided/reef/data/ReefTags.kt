@@ -14,7 +14,7 @@ object ReefTags {
     val HAS_VANILLA_ERODED_PILLAR = biomeTag("has_vanilla_eroded_pillar")
 
     @JvmField
-    val HAS_ICEBERG = biomeTag("has_iceberg")
+    val HAS_VANILLA_ICEBERG = biomeTag("has_vanilla_iceberg")
 
 
     private fun biomeTag(id: String): TagKey<Biome> = TagKey.of(RegistryKeys.BIOME, id(id))

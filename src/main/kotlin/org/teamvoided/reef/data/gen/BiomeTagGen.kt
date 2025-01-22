@@ -17,7 +17,7 @@ class BiomeTagGen(output: FabricDataOutput, registriesFuture: CompletableFuture<
         /*  getOrCreateTagBuilder(ReefTags.HAS_ERODED_PILLAR)
               .add(Biomes.FOREST)
               .add(Biomes.PLAINS)*/
-        getOrCreateTagBuilder(ReefTags.HAS_ICEBERG)
+        getOrCreateTagBuilder(ReefTags.HAS_VANILLA_ICEBERG)
             .add(Biomes.FROZEN_OCEAN)
             .add(Biomes.DEEP_FROZEN_OCEAN)
     }
