@@ -22,6 +22,7 @@ val curse_id: String? by project
 repositories {
     maven("https://teamvoided.org/releases")
     maven("https://maven.terraformersmc.com/") { name = "TerraformersMC" }
+    maven("https://api.modrinth.com/maven")
     mavenCentral()
     mavenLocal()
 }
@@ -41,6 +42,8 @@ dependencies {
 
     modCompileOnly("${libs.emi.get()}:api")
     modLocalRuntime(libs.emi)
+
+    modLocalRuntime("maven.modrinth:jade:15.9.2+fabric")
 }
 
 loom {
