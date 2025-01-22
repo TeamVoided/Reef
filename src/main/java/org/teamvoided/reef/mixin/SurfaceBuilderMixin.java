@@ -30,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.teamvoided.reef.api.events.CustomSurfaceBuilder;
 import org.teamvoided.reef.data.ReefTags;
 
-@Debug(export = true)
 @Mixin(SurfaceBuilder.class)
 public abstract class SurfaceBuilderMixin {
     @Final
