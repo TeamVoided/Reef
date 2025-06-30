@@ -14,7 +14,7 @@ class BiomeTagGen(output: FabricDataOutput, registriesFuture: CompletableFuture<
     override fun addTags(arg: HolderLookup.Provider) {
         builder(ReefTags.HAS_VANILLA_ERODED_PILLAR)
             .add(Biomes.ERODED_BADLANDS)
-        /*  getOrCreateTagBuilder(ReefTags.HAS_ERODED_PILLAR)
+       /* builder(ReefTags.HAS_ERODED_PILLAR)
               .add(Biomes.FOREST)
               .add(Biomes.PLAINS)*/
         builder(ReefTags.HAS_VANILLA_ICEBERG)

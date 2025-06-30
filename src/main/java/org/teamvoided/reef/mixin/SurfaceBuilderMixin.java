@@ -12,12 +12,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.BlockColumn;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.NoiseChunk;
-import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.SurfaceSystem;
-import net.minecraft.world.level.levelgen.WorldGenerationContext;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,15 +32,16 @@ public abstract class SurfaceBuilderMixin {
     @Final
     @Shadow
     private NormalNoise badlandsPillarNoise;
-    @Final
     @Shadow
-    private NormalNoise badlandsPillarRootNoise;
+    @Final
+    private NormalNoise badlandsPillarRoofNoise;
     @Final
     @Shadow
     private BlockState defaultBlock;
     @Final
     @Shadow
     private int seaLevel;
+
 
     @Redirect(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Holder;is(Lnet/minecraft/resources/ResourceKey;)Z"))
     private boolean reef$taggedVanillaSurfaceBuilders(Holder<Biome> biome, ResourceKey<Biome> biomeKey) {
@@ -67,7 +63,7 @@ public abstract class SurfaceBuilderMixin {
             double pn = this.badlandsPillarNoise.getValue(x * 0.2, 0.0, z * 0.2);
             double e = Math.min(Math.abs(sn * 8.25), pn * 15.0);
             if (!(e <= 0.0)) {
-                double h = Math.abs(this.badlandsPillarRootNoise.getValue((double) x * 0.75, 0.0, (double) z * 0.75) * 1.5);
+                double h = Math.abs(this.badlandsPillarRoofNoise.getValue((double) x * 0.75, 0.0, (double) z * 0.75) * 1.5);
                 int j = Mth
                         .floor(64.0 + Math.min(e * e * 2.5, Math.ceil(h * 50.0) + 24.0)) - Math.max(seaLevel - y, 0);
                 if (y <= j) {
