@@ -1,7 +1,7 @@
 package org.teamvoided.reef
 
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.teamvoided.reef.init.ReefFeatures
@@ -41,5 +41,5 @@ object Reef {
 
 //          log.info("This is marine invertebrate takeover!")
 
-    fun id(path: String) = Identifier.of(MODID, path)
+    fun id(path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath(MODID, path)
 }

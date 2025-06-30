@@ -1,34 +1,34 @@
 package org.teamvoided.reef.world.gen.configured_feature
 
 import com.mojang.serialization.Codec
-import net.minecraft.block.Block
-import net.minecraft.block.Blocks
-import net.minecraft.block.entity.MobSpawnerBlockEntity
-import net.minecraft.inventory.LootableInventory
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.BlockTags
-import net.minecraft.structure.piece.StructurePiece
-import net.minecraft.util.Util
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.world.gen.feature.Feature
-import net.minecraft.world.gen.feature.util.FeatureContext
+import net.minecraft.Util
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.BlockTags
+import net.minecraft.world.RandomizableContainer
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.entity.SpawnerBlockEntity
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
+import net.minecraft.world.level.levelgen.structure.StructurePiece
 import org.teamvoided.reef.Reef.log
-import org.teamvoided.reef.world.gen.configured_feature.config.MonsterRoomFeatureConfig
+import org.teamvoided.reef.world.gen.configured_feature.config.ReefMonsterRoomFeatureConfig
 
 @Suppress("DEPRECATION", "ComplexCondition", "MagicNumber")
-class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
-    Feature<MonsterRoomFeatureConfig>(codec) {
-    override fun place(context: FeatureContext<MonsterRoomFeatureConfig>): Boolean {
-        val config = context.config
+class ReefMonsterRoomFeature(codec: Codec<ReefMonsterRoomFeatureConfig>) :
+    Feature<ReefMonsterRoomFeatureConfig>(codec) {
+    override fun place(context: FeaturePlaceContext<ReefMonsterRoomFeatureConfig>): Boolean {
+        val config = context.config()
         var blockPos2: BlockPos
         var u: Int
         var t: Int
-        val predicate = notInBlockTagPredicate(BlockTags.FEATURES_CANNOT_REPLACE)
-        val blockPos = context.origin
-        val random = context.random
-        val world = context.world
+        val predicate = isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE)
+        val blockPos = context.origin()
+        val random = context.random()
+        val world = context.level()
         val j = random.nextInt(2) + 2
         val k = -j - 1
         val l = j + 1
@@ -42,13 +42,13 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
             while (t <= 4) {
                 u = p
                 while (u <= q) {
-                    blockPos2 = blockPos.add(s, t, u)
+                    blockPos2 = blockPos.offset(s, t, u)
                     val bl = world.getBlockState(blockPos2).isSolid
                     if (t == -1 && !bl) return false
                     if (t == 4 && !bl) return false
 
-                    if (s != k && s != l && u != p && u != q || t != 0 || !world.isAir(blockPos2) ||
-                        !world.isAir(blockPos2.up())
+                    if (s != k && s != l && u != p && u != q || t != 0 || !world.isEmptyBlock(blockPos2) ||
+                        !world.isEmptyBlock(blockPos2.above())
                     ) {
                         ++u
                         continue
@@ -68,36 +68,36 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
             while (t >= -1) {
                 u = p
                 while (u <= q) {
-                    blockPos2 = blockPos.add(s, t, u)
+                    blockPos2 = blockPos.offset(s, t, u)
                     val blockState = world.getBlockState(blockPos2)
                     if (s == k || t == -1 || u == p || s == l || t == 4 || u == q) {
-                        if (blockPos2.y >= world.bottomY && !world.getBlockState(blockPos2.down()).isSolid) {
-                            world.setBlockState(blockPos2, Blocks.CAVE_AIR.defaultState, Block.NOTIFY_LISTENERS)
+                        if (blockPos2.y >= world.minY && !world.getBlockState(blockPos2.below()).isSolid) {
+                            world.setBlock(blockPos2, Blocks.CAVE_AIR.defaultBlockState(), Block.UPDATE_CLIENTS)
                             ++u
                             continue
                         }
-                        if (!blockState.isSolid || blockState.isOf(Blocks.CHEST)) {
+                        if (!blockState.isSolid || blockState.`is`(Blocks.CHEST)) {
                             ++u
                             continue
                         }
                         if (t == -1 && random.nextInt(4) != 0) {
-                            this.setBlockStateIf(
-                                world, blockPos2, config.secondaryBlock.getBlockState(random, blockPos2), predicate
+                            this.safeSetBlock(
+                                world, blockPos2, config.secondaryBlock.getState(random, blockPos2), predicate
                             )
                             ++u
                             continue
                         }
-                        this.setBlockStateIf(
-                            world, blockPos2, config.primaryBlock.getBlockState(random, blockPos2), predicate
+                        this.safeSetBlock(
+                            world, blockPos2, config.primaryBlock.getState(random, blockPos2), predicate
                         )
                         ++u
                         continue
                     }
-                    if (blockState.isOf(Blocks.CHEST) || blockState.isOf(Blocks.SPAWNER)) {
+                    if (blockState.`is`(Blocks.CHEST) || blockState.`is`(Blocks.SPAWNER)) {
                         ++u
                         continue
                     }
-                    this.setBlockStateIf(world, blockPos2, Blocks.CAVE_AIR.defaultState, predicate)
+                    this.safeSetBlock(world, blockPos2, Blocks.CAVE_AIR.defaultBlockState(), predicate)
                     ++u
                 }
                 --t
@@ -117,26 +117,26 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
                     (blockPos.z + random.nextInt(o * 2 + 1) - o).also {
                         w = it
                     })
-                if (!world.isAir(blockPos3)) {
+                if (!world.isEmptyBlock(blockPos3)) {
                     ++t
                     continue
                 }
                 var x = 0
-                for (direction in Direction.Type.HORIZONTAL) {
-                    if (!world.getBlockState(blockPos3.offset(direction)).isSolid) continue
+                for (direction in Direction.Plane.HORIZONTAL) {
+                    if (!world.getBlockState(blockPos3.relative(direction)).isSolid) continue
                     ++x
                 }
                 if (x != 1) {
                     ++t
                     continue
                 }
-                this.setBlockStateIf(
+                this.safeSetBlock(
                     world, blockPos3,
-                    StructurePiece.orientateChest(world, blockPos3, Blocks.CHEST.defaultState), predicate
+                    StructurePiece.reorient(world, blockPos3, Blocks.CHEST.defaultBlockState()), predicate
                 )
                 // LootTables.SIMPLE_DUNGEON_CHEST
-                LootableInventory.setupLootTable(
-                    world, random, blockPos3, RegistryKey.of(RegistryKeys.LOOT_TABLE, config.lootTable)
+                RandomizableContainer.setBlockEntityLootTable(
+                    world, random, blockPos3, ResourceKey.create(Registries.LOOT_TABLE, config.lootTable)
                 )
                 ++s
                 continue@block6
@@ -144,10 +144,10 @@ class MonsterRoomFeature(codec: Codec<MonsterRoomFeatureConfig>) :
             }
             ++s
         }
-        this.setBlockStateIf(world, blockPos, Blocks.SPAWNER.defaultState, predicate)
+        this.safeSetBlock(world, blockPos, Blocks.SPAWNER.defaultBlockState(), predicate)
         val blockEntity = world.getBlockEntity(blockPos)
-        if (blockEntity is MobSpawnerBlockEntity) {
-            blockEntity.setEntityType(Util.getRandom(config.monsterType, random), random)
+        if (blockEntity is SpawnerBlockEntity) {
+            blockEntity.setEntityId(Util.getRandom(config.monsterType, random), random)
         } else {
             log.error("Failed to fetch mob spawner entity at ({}, {}, {})", blockPos.x, blockPos.y, blockPos.z)
         }

@@ -11,20 +11,19 @@ plugins {
     alias(libs.plugins.iridium.publish)
     alias(libs.plugins.iridium.upload)
 }
-
-group = property("maven_group")!!
-version = property("mod_version")!!
-base.archivesName.set(modSettings.modId())
-
-val modrinth_id: String? by project
-val curse_id: String? by project
-
 repositories {
-    maven("https://teamvoided.org/releases")
-    maven("https://maven.terraformersmc.com/") { name = "TerraformersMC" }
-    maven("https://api.modrinth.com/maven")
+    maven("https://teamvoided.org/releases") { content { includeGroup("org.teamvoided") } }
+    maven("https://teamvoided.org/snapshots") { content { includeGroup("org.teamvoided") } }
+    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven"; content { includeGroup("me.fzzyhmstrs") } }
+    maven("https://maven.terraformersmc.com/") {
+        name = "Terraformers"
+        content {
+            includeGroup("com.terraformersmc")
+            includeGroup("dev.emi")
+        }
+    }
+    maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
     mavenCentral()
-    mavenLocal()
 }
 
 modSettings {
@@ -39,11 +38,6 @@ modSettings {
 dependencies {
     modImplementation(fileTree("libs"))
     modImplementation(libs.modmenu)
-
-    modCompileOnly("${libs.emi.get()}:api")
-    modLocalRuntime(libs.emi)
-
-    modLocalRuntime("maven.modrinth:jade:15.9.2+fabric")
 }
 
 loom {
@@ -84,14 +78,7 @@ tasks {
         toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
         withSourcesJar()
     }
-//    jar {
-//        val valTaskNames = gradle.startParameter.taskNames
-//        if (!valTaskNames.contains("runDataGen")) {
-//            exclude("org/teamvoided/reef/data/gen/*")
-//        } else {
-//            println("Running datagen for task ${valTaskNames.joinToString(" ")}")
-//        }
-//    }
+
 }
 
 publishScript {
@@ -102,8 +89,8 @@ publishScript {
 
 uploadConfig {
 //    debugMode = true
-    modrinthId = modrinth_id
-    curseId = curse_id
+    modrinthId = "AqJVwCCS"
+    curseId = "1007845"
 
     changeLog = "- fixed z-lands bug with eroded pillar tag"
 

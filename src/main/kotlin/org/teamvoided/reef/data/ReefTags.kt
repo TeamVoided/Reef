@@ -1,9 +1,9 @@
 package org.teamvoided.reef.data
 
-import net.minecraft.block.Block
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.world.biome.Biome
+import net.minecraft.core.registries.Registries
+import net.minecraft.tags.TagKey
+import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Block
 import org.teamvoided.reef.Reef.id
 
 object ReefTags {
@@ -17,6 +17,6 @@ object ReefTags {
     val HAS_VANILLA_ICEBERG = biomeTag("has_vanilla_iceberg")
 
 
-    private fun biomeTag(id: String): TagKey<Biome> = TagKey.of(RegistryKeys.BIOME, id(id))
-    fun create(id: String): TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id(id))
+    private fun biomeTag(id: String): TagKey<Biome> = TagKey.create(Registries.BIOME, id(id))
+    fun create(id: String): TagKey<Block> = TagKey.create(Registries.BLOCK, id(id))
 }
