@@ -28,19 +28,19 @@ open class ReferencePoolElement(
     fun template(): StructureTemplatePool = templatePool.value()
 
     override fun getSize(structureTemplateManager: StructureTemplateManager, rotation: Rotation): Vec3i {
-        var i = 0
-        var j = 0
-        var k = 0
+        var x = 0
+        var y = 0
+        var z = 0
 
         for (element in template().templates) {
             val vec3i = element.first.getSize(structureTemplateManager, rotation)
-            i = max(i, vec3i.x)
-            j = max(j, vec3i.y)
-            k = max(k, vec3i.z)
+            x = max(x, vec3i.x)
+            y = max(y, vec3i.y)
+            z = max(z, vec3i.z)
         }
 
 
-        return Vec3i(i, j, k)
+        return Vec3i(x, y, z)
     }
 
     override fun getShuffledJigsawBlocks(
