@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.teamvoided.reef.init.ReefFeatures
+import org.teamvoided.reef.init.ReefStructurePoolElementType
 
 @Suppress("unused")
 object Reef {
@@ -16,6 +17,7 @@ object Reef {
     fun commonInit() {
         log.info("Adding coral to your Worlds!")
         ReefFeatures.init()
+        ReefStructurePoolElementType.init()
 
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment) {
