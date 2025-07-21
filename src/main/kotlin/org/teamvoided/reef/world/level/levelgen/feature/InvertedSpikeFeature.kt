@@ -1,13 +1,13 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
 import net.minecraft.util.Mth
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
-import org.teamvoided.reef.world.gen.configured_feature.config.SpikeFeatureConfig
+import org.teamvoided.reef.world.level.levelgen.feature.config.SpikeFeatureConfig
 import kotlin.math.abs
 
-class InvertedSpikeFeature(configCodec: Codec<SpikeFeatureConfig>?) :
+class InvertedSpikeFeature(configCodec: Codec<SpikeFeatureConfig>) :
     Feature<SpikeFeatureConfig>(configCodec) {
 
     override fun place(context: FeaturePlaceContext<SpikeFeatureConfig>): Boolean {

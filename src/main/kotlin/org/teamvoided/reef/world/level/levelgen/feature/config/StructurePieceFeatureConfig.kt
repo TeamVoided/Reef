@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature.config
+package org.teamvoided.reef.world.level.levelgen.feature.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder

@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
 import net.minecraft.Util
@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.structure.StructurePiece
 import org.teamvoided.reef.Reef.log
-import org.teamvoided.reef.world.gen.configured_feature.config.ReefMonsterRoomFeatureConfig
+import org.teamvoided.reef.world.level.levelgen.feature.config.ReefMonsterRoomFeatureConfig
 
 @Suppress("DEPRECATION", "ComplexCondition", "MagicNumber")
 class ReefMonsterRoomFeature(codec: Codec<ReefMonsterRoomFeatureConfig>) :

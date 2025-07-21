@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import net.minecraft.core.BlockPos
 import net.minecraft.util.Mth

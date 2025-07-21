@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.phys.Vec3
-import org.teamvoided.reef.world.gen.configured_feature.config.LargeCavePillarFeatureConfig
+import org.teamvoided.reef.world.level.levelgen.feature.config.LargeCavePillarFeatureConfig
 import kotlin.math.min
 
 class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :

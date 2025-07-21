@@ -1,9 +1,9 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
-import org.teamvoided.reef.world.gen.configured_feature.config.ListFeatureConfig
+import org.teamvoided.reef.world.level.levelgen.feature.config.ListFeatureConfig
 
 class ListFeature(codec: Codec<ListFeatureConfig>) :
     Feature<ListFeatureConfig>(codec) {

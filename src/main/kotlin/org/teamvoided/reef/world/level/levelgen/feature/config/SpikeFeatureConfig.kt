@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature.config
+package org.teamvoided.reef.world.level.levelgen.feature.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
@@ -14,9 +14,9 @@ data class SpikeFeatureConfig(
     val longSpikeOffsetMin: Int,
     val longSpikeOffsetMax: Int,
     val baseBlock: BlockStateProvider,
-    var canReplace: HolderSet<Block>
+    var canReplace: HolderSet<Block>,
 
-) : FeatureConfiguration {
+    ) : FeatureConfiguration {
     companion object {
         val CODEC: Codec<SpikeFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SpikeFeatureConfig> ->

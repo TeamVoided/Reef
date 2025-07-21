@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature.config
+package org.teamvoided.reef.world.level.levelgen.feature.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
@@ -22,7 +22,7 @@ data class LargeCavePillarFeatureConfig(
     val minRadiusForWind: Int,
     val minBluntnessForWind: Float,
     val mainBlock: BlockStateProvider,
-    var canPlaceOn: HolderSet<Block>
+    var canPlaceOn: HolderSet<Block>,
 ) : FeatureConfiguration {
     companion object {
         val CODEC: Codec<LargeCavePillarFeatureConfig> = RecordCodecBuilder

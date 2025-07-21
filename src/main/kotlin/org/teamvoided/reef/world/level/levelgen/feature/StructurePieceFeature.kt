@@ -1,4 +1,4 @@
-package org.teamvoided.reef.world.gen.configured_feature
+package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
 import net.minecraft.world.level.ChunkPos
@@ -10,9 +10,9 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings
 import org.apache.commons.lang3.mutable.MutableInt
-import org.teamvoided.reef.world.gen.configured_feature.config.StructurePieceFeatureConfig
+import org.teamvoided.reef.world.level.levelgen.feature.config.StructurePieceFeatureConfig
 
-class StructurePieceFeature(configCodec: Codec<StructurePieceFeatureConfig>?) :
+class StructurePieceFeature(configCodec: Codec<StructurePieceFeatureConfig>) :
     Feature<StructurePieceFeatureConfig>(configCodec) {
 
     override fun place(context: FeaturePlaceContext<StructurePieceFeatureConfig>): Boolean {

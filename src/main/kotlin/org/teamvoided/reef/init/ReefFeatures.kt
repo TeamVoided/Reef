@@ -5,8 +5,8 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import org.teamvoided.reef.Reef.id
-import org.teamvoided.reef.world.gen.configured_feature.*
-import org.teamvoided.reef.world.gen.configured_feature.config.*
+import org.teamvoided.reef.world.level.levelgen.feature.*
+import org.teamvoided.reef.world.level.levelgen.feature.config.*
 
 
 @Suppress("unused")
