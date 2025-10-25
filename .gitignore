@@ -6,6 +6,7 @@ build/
 
 ### TeamVoided
 src/main/generated/
+.kotlin/
 
 ### IntelliJ IDEA ###
 /.idea/
