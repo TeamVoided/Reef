@@ -5,9 +5,12 @@ iridium = "3.5.0"
 
 # Dev
 modmenu = "16.0.0-rc.1"
+lithostitched = "OHVYggvo" # 1.5.1
 
 [libraries]
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+lithostitched = { module = "maven.modrinth:lithostitched", version.ref = "lithostitched" }
+
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

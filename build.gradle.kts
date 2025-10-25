@@ -38,6 +38,8 @@ modSettings {
 dependencies {
     modImplementation(fileTree("libs"))
     modImplementation(libs.modmenu)
+
+    modImplementation(libs.lithostitched)
 }
 
 loom {
