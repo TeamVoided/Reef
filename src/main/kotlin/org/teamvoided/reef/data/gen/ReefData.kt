@@ -6,7 +6,6 @@ import org.teamvoided.reef.Reef.log
 
 class ReefData : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
-        log.info("Hello from DataGen")
         val pack = gen.createPack()
         pack.addProvider(::BiomeTagGen)
     }

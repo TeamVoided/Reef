@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.teamvoided.reef.api.events.CustomSurfaceBuilder;
-import org.teamvoided.reef.data.ReefTags;
+import org.teamvoided.reef.data.ReefBiomeTags;
 
 @Mixin(SurfaceSystem.class)
 public abstract class SurfaceBuilderMixin {
@@ -45,9 +45,9 @@ public abstract class SurfaceBuilderMixin {
 
     @Redirect(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Holder;is(Lnet/minecraft/resources/ResourceKey;)Z"))
     private boolean reef$taggedVanillaSurfaceBuilders(Holder<Biome> biome, ResourceKey<Biome> biomeKey) {
-        if (biomeKey == Biomes.ERODED_BADLANDS) return biome.is(ReefTags.HAS_ERODED_PILLAR);
+        if (biomeKey == Biomes.ERODED_BADLANDS) return biome.is(ReefBiomeTags.HAS_ERODED_PILLAR);
         else if (biomeKey == Biomes.FROZEN_OCEAN || biomeKey == Biomes.DEEP_FROZEN_OCEAN)
-            return biome.is(ReefTags.HAS_VANILLA_ICEBERG);
+            return biome.is(ReefBiomeTags.HAS_VANILLA_ICEBERG);
         else return biome.is(biomeKey);
     }
 
@@ -57,7 +57,7 @@ public abstract class SurfaceBuilderMixin {
         CustomSurfaceBuilder.PRE_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
 
         // Move this to kotlin in the future
-        if (biome.is(ReefTags.HAS_ERODED_PILLAR)) {
+        if (biome.is(ReefBiomeTags.HAS_ERODED_PILLAR)) {
             int y = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) + 1;
             double sn = this.badlandsSurfaceNoise.getValue(x, 0.0, z);
             double pn = this.badlandsPillarNoise.getValue(x * 0.2, 0.0, z * 0.2);

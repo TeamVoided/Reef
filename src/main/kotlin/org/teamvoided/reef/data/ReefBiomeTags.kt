@@ -6,7 +6,7 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Block
 import org.teamvoided.reef.Reef.id
 
-object ReefTags {
+object ReefBiomeTags {
     @JvmField
     val HAS_ERODED_PILLAR = biomeTag("has_eroded_pillar")
 
