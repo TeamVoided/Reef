@@ -34,6 +34,7 @@ public class TemplateStructurePieceMixin implements StructureRefHolder {
         if (!nbt.contains(STRUCTURE_REF_KEY)) return;
         var id = ResourceLocation.tryParse(nbt.getStringOr(STRUCTURE_REF_KEY, FAILED_PARSE.toString()));
         if (id != null && id != FAILED_PARSE) {
+            reef$structureRef = id;
             placeSettings.addProcessor(UnboundReferenceProcessorAccessor.reef$new(reef$structureRef));
         }
     }
