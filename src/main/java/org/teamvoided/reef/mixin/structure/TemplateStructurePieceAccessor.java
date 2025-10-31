@@ -1,4 +1,4 @@
-package org.teamvoided.reef.mixin;
+package org.teamvoided.reef.mixin.structure;
 
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;

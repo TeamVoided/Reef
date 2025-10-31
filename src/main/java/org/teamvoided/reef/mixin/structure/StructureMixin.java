@@ -1,4 +1,4 @@
-package org.teamvoided.reef.mixin;
+package org.teamvoided.reef.mixin.structure;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;

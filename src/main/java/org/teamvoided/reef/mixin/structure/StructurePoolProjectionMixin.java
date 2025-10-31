@@ -1,4 +1,4 @@
-package org.teamvoided.reef.mixin;
+package org.teamvoided.reef.mixin.structure;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.util.StringRepresentable;

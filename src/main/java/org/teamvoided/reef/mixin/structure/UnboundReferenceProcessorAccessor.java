@@ -1,4 +1,4 @@
-package org.teamvoided.reef.mixin;
+package org.teamvoided.reef.mixin.structure;
 
 import dev.worldgen.lithostitched.worldgen.processor.UnboundReferenceProcessor;
 import net.minecraft.resources.ResourceLocation;

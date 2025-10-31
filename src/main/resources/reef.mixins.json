@@ -5,11 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ChiseledBookShelfBlockEntityMixin",
-    "StructureMixin",
-    "StructurePoolProjectionMixin",
+    "structure.StructureMixin",
+    "structure.StructurePoolProjectionMixin",
     "SurfaceBuilderMixin",
-    "TemplateStructurePieceAccessor",
-    "UnboundReferenceProcessorAccessor"
+    "structure.TemplateStructurePieceAccessor",
+    "structure.UnboundReferenceProcessorAccessor"
   ],
   "client": [
   ],
