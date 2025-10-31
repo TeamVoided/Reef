@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.minecraft.world.RandomizableContainer.LOOT_TABLE_SEED_TAG;
 import static net.minecraft.world.RandomizableContainer.LOOT_TABLE_TAG;
-import static org.teamvoided.reef.util.MixinsKt.fillBookshelfFromLootTable;
+import static org.teamvoided.reef.util.mixin.MixinsKt.fillBookshelfFromLootTable;
 
 @Mixin(ChiseledBookShelfBlockEntity.class)
 public class ChiseledBookShelfBlockEntityMixin {

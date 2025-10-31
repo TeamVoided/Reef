@@ -30,6 +30,7 @@ public abstract class StructureMixin {
             var structure = holder.unwrapKey().get().location();
             for (StructurePiece piece : original.pieces()) {
                 if (!(piece instanceof TemplateStructurePieceAccessor pc)) continue;
+                pc.reef_setStructureRef(structure);
                 pc.reef$setPlaceSettings(pc.reef$getPlaceSettings().addProcessor(reef$addRSP(registryAccess, structure)));
             }
         }

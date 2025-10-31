@@ -1,4 +1,4 @@
-package org.teamvoided.reef.util
+package org.teamvoided.reef.util.mixin
 
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
@@ -7,6 +7,11 @@ import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams
+import org.teamvoided.reef.Reef.id
+
+const val STRUCTURE_REF_KEY = "reef:ref"
+@JvmField
+val FAILED_PARSE = id("failed_parse")
 
 fun fillBookshelfFromLootTable(be: ChiseledBookShelfBlockEntity, key: ResourceKey<LootTable>, seed: Long) {
     if (!be.isEmpty) return
