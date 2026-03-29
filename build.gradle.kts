@@ -135,8 +135,8 @@ publishScript {
 uploadScript {
     debugMode = false
 
-    modrinthId = "id"
-    curseId = "0"
+    modrinthId = "AqJVwCCS"
+    curseId = "1007845"
 
     changelog = File("changelog.md").readText()
 
