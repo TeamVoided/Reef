@@ -133,7 +133,7 @@ publishScript {
 }
 
 uploadScript {
-    debugMode = false
+    debugMode = true
 
     modrinthId = "AqJVwCCS"
     curseId = "1007845"
