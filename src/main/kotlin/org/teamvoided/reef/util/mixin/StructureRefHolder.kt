@@ -1,9 +1,12 @@
 package org.teamvoided.reef.util.mixin
 
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 @Suppress("FunctionName")
 interface StructureRefHolder {
-    fun reef_setStructureRef(id: ResourceLocation)
-    fun reef_getStructureRef(): ResourceLocation?
+
+    fun reef_setStructureRef(id: Identifier)
+
+    fun reef_getStructureRef(): Identifier?
+
 }

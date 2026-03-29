@@ -11,6 +11,7 @@ import kotlin.math.max
 import kotlin.math.pow
 
 object CavePillarHelper {
+
     fun scaleHeightFromRadius(radius: Double, scale: Double, heightScale: Double, bluntness: Double): Double {
         val r = if (radius < bluntness) bluntness else radius
 
@@ -27,7 +28,7 @@ object CavePillarHelper {
         if (canGenerateOrLava(world, pos)) return false
 
         val g = 6.0f / height.toFloat()
-        var h = 0.0f
+        var h = 0.0
 
         while (h < Math.PI * 2) {
             val i = (Mth.cos(h) * height.toFloat()).toInt()
@@ -55,5 +56,5 @@ object CavePillarHelper {
     fun canGenerateOrLava(state: BlockState): Boolean {
         return state.isAir || state.`is`(Blocks.WATER) || state.`is`(Blocks.LAVA)
     }
-}
 
+}

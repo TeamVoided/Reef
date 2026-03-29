@@ -9,14 +9,14 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import org.teamvoided.reef.Reef.id
 
-const val STRUCTURE_REF_KEY = "reef:ref"
+const val STRUCTURE_REF_KEY = "reef:reference"
 @JvmField
 val FAILED_PARSE = id("failed_parse")
 
 fun fillBookshelfFromLootTable(be: ChiseledBookShelfBlockEntity, key: ResourceKey<LootTable>, seed: Long) {
     if (!be.isEmpty) return
     val level = be.level as? ServerLevel ?: return
-    val table = level.server.reloadableRegistries()?.getLootTable(key) ?: return
+    val table = level.server.reloadableRegistries().getLootTable(key)
 
     val lootParams = LootParams.Builder(level)
         .withParameter(LootContextParams.ORIGIN, be.blockPos.center)

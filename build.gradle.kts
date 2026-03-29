@@ -146,5 +146,5 @@ uploadScript {
 
     dependency("P7dR8mSH", "fabric-api")
     dependency("Ha28R6CL", "fabric-language-kotlin")
-    dependency("hYykXjDp", "fzzy-config")
+    dependency("XaDC71GB", "lithostitched")
 }

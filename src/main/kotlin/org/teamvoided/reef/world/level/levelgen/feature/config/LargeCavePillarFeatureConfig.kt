@@ -24,31 +24,33 @@ data class LargeCavePillarFeatureConfig(
     val mainBlock: BlockStateProvider,
     var canPlaceOn: HolderSet<Block>,
 ) : FeatureConfiguration {
+
     companion object {
-        val CODEC: Codec<LargeCavePillarFeatureConfig> = RecordCodecBuilder
-            .create { instance ->
-                instance
-                    .group(
-                        Codec.intRange(1, 512).fieldOf("floor_to_ceiling_search_range").orElse(30)
-                            .forGetter { it.floorToCeilingSearchRange },
-                        IntProvider.codec(1, 60).fieldOf("column_radius").forGetter { it.columnRadius },
-                        FloatProvider.codec(0.0f, 20.0f).fieldOf("height_scale")
-                            .forGetter { it.heightScale },
-                        Codec.floatRange(0.1f, 1.0f).fieldOf("max_column_radius_to_cave_height_ratio")
-                            .forGetter { it.maxColumnRadiusToCaveHeightRatio },
-                        FloatProvider.codec(0.1f, 10.0f).fieldOf("stalactite_bluntness")
-                            .forGetter { it.stalactiteBluntness },
-                        FloatProvider.codec(0.1f, 10.0f).fieldOf("stalagmite_bluntness")
-                            .forGetter { it.stalagmiteBluntness },
-                        FloatProvider.codec(0.0f, 2.0f).fieldOf("wind_speed").forGetter { it.windSpeed },
-                        Codec.intRange(0, 100).fieldOf("min_radius_for_wind").forGetter { it.minRadiusForWind },
-                        Codec.floatRange(0.0f, 5.0f)
-                            .fieldOf("min_bluntness_for_wind").forGetter { it.minBluntnessForWind },
-                        BlockStateProvider.CODEC.fieldOf("main_block").forGetter { it.mainBlock },
-                        RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_place_on")
-                            .forGetter { it.canPlaceOn }
-                    )
-                    .apply(instance, ::LargeCavePillarFeatureConfig)
-            }
+
+        val CODEC: Codec<LargeCavePillarFeatureConfig> = RecordCodecBuilder.create { instance ->
+            instance
+                .group(
+                    Codec.intRange(1, 512).fieldOf("floor_to_ceiling_search_range").orElse(30)
+                        .forGetter { it.floorToCeilingSearchRange },
+                    IntProvider.codec(1, 60).fieldOf("column_radius").forGetter { it.columnRadius },
+                    FloatProvider.codec(0.0f, 20.0f).fieldOf("height_scale")
+                        .forGetter { it.heightScale },
+                    Codec.floatRange(0.1f, 1.0f).fieldOf("max_column_radius_to_cave_height_ratio")
+                        .forGetter { it.maxColumnRadiusToCaveHeightRatio },
+                    FloatProvider.codec(0.1f, 10.0f).fieldOf("stalactite_bluntness")
+                        .forGetter { it.stalactiteBluntness },
+                    FloatProvider.codec(0.1f, 10.0f).fieldOf("stalagmite_bluntness")
+                        .forGetter { it.stalagmiteBluntness },
+                    FloatProvider.codec(0.0f, 2.0f).fieldOf("wind_speed").forGetter { it.windSpeed },
+                    Codec.intRange(0, 100).fieldOf("min_radius_for_wind").forGetter { it.minRadiusForWind },
+                    Codec.floatRange(0.0f, 5.0f)
+                        .fieldOf("min_bluntness_for_wind").forGetter { it.minBluntnessForWind },
+                    BlockStateProvider.CODEC.fieldOf("main_block").forGetter { it.mainBlock },
+                    RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_place_on")
+                        .forGetter { it.canPlaceOn }
+                )
+                .apply(instance, ::LargeCavePillarFeatureConfig)
+        }
+
     }
 }

@@ -102,4 +102,5 @@ class SpikeFeature(configCodec: Codec<SpikeFeatureConfig>) : Feature<SpikeFeatur
             return true
         }
     }
+
 }

@@ -8,6 +8,7 @@ import org.teamvoided.reef.util.mixin.StructureRefHolder;
 
 @Mixin(TemplateStructurePiece.class)
 public interface TemplateStructurePieceAccessor extends StructureRefHolder {
+
     @Accessor("placeSettings")
     StructurePlaceSettings reef$getPlaceSettings();
 

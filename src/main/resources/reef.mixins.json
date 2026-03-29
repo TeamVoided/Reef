@@ -7,7 +7,6 @@
     "ChiseledBookShelfBlockEntityMixin",
     "SurfaceBuilderMixin",
     "structure.StructureMixin",
-    "structure.StructurePoolProjectionMixin",
     "structure.TemplateStructurePieceAccessor",
     "structure.TemplateStructurePieceMixin",
     "structure.UnboundReferenceProcessorAccessor"

@@ -18,6 +18,7 @@ import org.teamvoided.reef.init.ReefStructureProcessorType
 
 @Suppress("unused")
 class BlockEntityModifierProcessor(val mods: List<Pair<RuleTest, RuleBlockEntityModifier>>) : StructureProcessor() {
+
     constructor(vararg pairs: Pair<RuleTest, RuleBlockEntityModifier>) : this(pairs.toList())
 
     override fun getType(): StructureProcessorType<*> = ReefStructureProcessorType.BLOCK_ENTITY_MODIFIER
@@ -42,6 +43,7 @@ class BlockEntityModifierProcessor(val mods: List<Pair<RuleTest, RuleBlockEntity
     }
 
     companion object {
+
         val CODEC: MapCodec<BlockEntityModifierProcessor> = RecordCodecBuilder.mapCodec {
             it.group(
                 Codec.pair(
@@ -51,5 +53,6 @@ class BlockEntityModifierProcessor(val mods: List<Pair<RuleTest, RuleBlockEntity
 
             ).apply(it, ::BlockEntityModifierProcessor)
         }
+
     }
 }

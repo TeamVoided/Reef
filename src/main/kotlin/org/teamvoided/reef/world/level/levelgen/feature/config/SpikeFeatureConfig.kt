@@ -15,19 +15,20 @@ data class SpikeFeatureConfig(
     val longSpikeOffsetMax: Int,
     val baseBlock: BlockStateProvider,
     var canReplace: HolderSet<Block>,
+) : FeatureConfiguration {
 
-    ) : FeatureConfiguration {
     companion object {
-        val CODEC: Codec<SpikeFeatureConfig> =
-            RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SpikeFeatureConfig> ->
-                instance.group(
-                    Codec.INT.fieldOf("chance_for_long_spike").orElse(60).forGetter { it.chanceForLongSpike },
-                    Codec.INT.fieldOf("long_spike_offset_min").orElse(10).forGetter { it.longSpikeOffsetMin },
-                    Codec.INT.fieldOf("long_spike_offset_max").orElse(30).forGetter { it.longSpikeOffsetMax },
-                    BlockStateProvider.CODEC.fieldOf("base_block").forGetter { it.baseBlock },
-                    RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_replace")
-                        .forGetter { it.canReplace }
-                ).apply(instance, ::SpikeFeatureConfig)
-            }
+
+        val CODEC: Codec<SpikeFeatureConfig> = RecordCodecBuilder.create { instance ->
+            instance.group(
+                Codec.INT.fieldOf("chance_for_long_spike").orElse(60).forGetter { it.chanceForLongSpike },
+                Codec.INT.fieldOf("long_spike_offset_min").orElse(10).forGetter { it.longSpikeOffsetMin },
+                Codec.INT.fieldOf("long_spike_offset_max").orElse(30).forGetter { it.longSpikeOffsetMax },
+                BlockStateProvider.CODEC.fieldOf("base_block").forGetter { it.baseBlock },
+                RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_replace")
+                    .forGetter { it.canReplace }
+            ).apply(instance, ::SpikeFeatureConfig)
+        }
+
     }
 }

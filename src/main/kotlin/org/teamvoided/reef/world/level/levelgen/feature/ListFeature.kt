@@ -5,8 +5,8 @@ import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import org.teamvoided.reef.world.level.levelgen.feature.config.ListFeatureConfig
 
-class ListFeature(codec: Codec<ListFeatureConfig>) :
-    Feature<ListFeatureConfig>(codec) {
+class ListFeature(codec: Codec<ListFeatureConfig>) : Feature<ListFeatureConfig>(codec) {
+
     override fun place(c: FeaturePlaceContext<ListFeatureConfig>): Boolean {
         val config = c.config()
         val random = c.random()
@@ -25,6 +25,5 @@ class ListFeature(codec: Codec<ListFeatureConfig>) :
 
         return j > 0 && j == config.features.size
     }
-
 
 }

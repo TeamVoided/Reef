@@ -12,17 +12,18 @@ data class ListFeatureConfig(
 //        val spreadXz: Int,
 //        val spreadY: Int,
     val features: List<Holder<PlacedFeature>>,
-) :
-    FeatureConfiguration {
+) : FeatureConfiguration {
+
     companion object {
-        val CODEC: Codec<ListFeatureConfig> =
-            RecordCodecBuilder.create { instance ->
-                instance.group(
-                    ExtraCodecs.POSITIVE_INT.fieldOf("tries").orElse(128).forGetter { it.tries },
-//                        Codecs.NONNEGATIVE_INT.fieldOf("xz_spread").orElse(7).forGetter { it.spreadXz },
-//                        Codecs.NONNEGATIVE_INT.fieldOf("y_spread").orElse(3).forGetter { it.spreadY },
-                    PlacedFeature.CODEC.listOf().fieldOf("features").forGetter { it.features }
-                ).apply(instance, ::ListFeatureConfig)
-            }
+
+        val CODEC: Codec<ListFeatureConfig> = RecordCodecBuilder.create { instance ->
+            instance.group(
+                ExtraCodecs.POSITIVE_INT.fieldOf("tries").orElse(128).forGetter { it.tries },
+//                Codecs.NONNEGATIVE_INT.fieldOf("xz_spread").orElse(7).forGetter { it.spreadXz },
+//                Codecs.NONNEGATIVE_INT.fieldOf("y_spread").orElse(3).forGetter { it.spreadY },
+                PlacedFeature.CODEC.listOf().fieldOf("features").forGetter { it.features }
+            ).apply(instance, ::ListFeatureConfig)
+        }
+
     }
 }

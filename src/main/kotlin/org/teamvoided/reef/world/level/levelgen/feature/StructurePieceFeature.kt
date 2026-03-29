@@ -12,8 +12,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import org.apache.commons.lang3.mutable.MutableInt
 import org.teamvoided.reef.world.level.levelgen.feature.config.StructurePieceFeatureConfig
 
-class StructurePieceFeature(configCodec: Codec<StructurePieceFeatureConfig>) :
-    Feature<StructurePieceFeatureConfig>(configCodec) {
+class StructurePieceFeature(codec: Codec<StructurePieceFeatureConfig>) : Feature<StructurePieceFeatureConfig>(codec) {
 
     override fun place(context: FeaturePlaceContext<StructurePieceFeatureConfig>): Boolean {
         val random = context.random()
@@ -60,6 +59,5 @@ class StructurePieceFeature(configCodec: Codec<StructurePieceFeatureConfig>) :
         }
         return mutableInt.value
     }
-
 
 }

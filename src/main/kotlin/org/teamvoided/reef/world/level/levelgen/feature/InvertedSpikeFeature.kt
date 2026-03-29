@@ -7,8 +7,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import org.teamvoided.reef.world.level.levelgen.feature.config.SpikeFeatureConfig
 import kotlin.math.abs
 
-class InvertedSpikeFeature(configCodec: Codec<SpikeFeatureConfig>) :
-    Feature<SpikeFeatureConfig>(configCodec) {
+class InvertedSpikeFeature(codec: Codec<SpikeFeatureConfig>) : Feature<SpikeFeatureConfig>(codec) {
 
     override fun place(context: FeaturePlaceContext<SpikeFeatureConfig>): Boolean {
         val config = context.config()
@@ -85,4 +84,5 @@ class InvertedSpikeFeature(configCodec: Codec<SpikeFeatureConfig>) :
 
         return true
     }
+
 }

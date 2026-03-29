@@ -21,4 +21,5 @@ public class ChiseledBookShelfBlockEntityMixin {
         if (table == null) return;
         fillBookshelfFromLootTable((ChiseledBookShelfBlockEntity) (Object) this, table, valueInput.getLongOr(LOOT_TABLE_SEED_TAG, 0L));
     }
+
 }

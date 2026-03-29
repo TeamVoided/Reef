@@ -26,6 +26,7 @@ import org.teamvoided.reef.data.ReefBiomeTags;
 
 @Mixin(SurfaceSystem.class)
 public abstract class SurfaceBuilderMixin {
+
     @Final
     @Shadow
     private NormalNoise badlandsSurfaceNoise;
@@ -54,7 +55,7 @@ public abstract class SurfaceBuilderMixin {
     @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/ChunkAccess;getHeight(Lnet/minecraft/world/level/levelgen/Heightmap$Types;II)I", ordinal = 1))
     private void reef$customSurfaceBuildersBefore(RandomState randomState, BiomeManager biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, WorldGenerationContext context, ChunkAccess chunk, NoiseChunk chunkNoiseSampler, SurfaceRules.RuleSource surfaceRule, CallbackInfo ci,
                                                   @Local Holder<Biome> biome, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
-        CustomSurfaceBuilder.PRE_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
+        CustomSurfaceBuilder.PRE_RULES.invoker().modifySurface(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
 
         // Move this to kotlin in the future
         if (biome.is(ReefBiomeTags.HAS_ERODED_PILLAR)) {
@@ -78,7 +79,8 @@ public abstract class SurfaceBuilderMixin {
     @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Holder;is(Lnet/minecraft/resources/ResourceKey;)Z", ordinal = 1))
     private void reef$customSurfaceBuildersAfter(RandomState randomState, BiomeManager biomeAccess, Registry<Biome> biomeRegistry, boolean useLegacyRandom, WorldGenerationContext context, ChunkAccess chunk, NoiseChunk chunkNoiseSampler, SurfaceRules.RuleSource surfaceRule,
                                                  CallbackInfo ci, @Local(ordinal = 4) int x, @Local(ordinal = 5) int z, @Local BlockColumn chunkBlockColumn) {
-        CustomSurfaceBuilder.POST_RULES.invoker().register(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
+        CustomSurfaceBuilder.POST_RULES.invoker().modifySurface(randomState, defaultBlock, seaLevel, biomeAccess, chunk, chunkBlockColumn, x, z);
 
     }
+
 }

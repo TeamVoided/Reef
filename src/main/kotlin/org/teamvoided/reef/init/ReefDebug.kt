@@ -1,16 +1,16 @@
 package org.teamvoided.reef.init
 
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.chat.Component.literal
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.BlockHitResult
-
+import org.teamvoided.reef.util.isDev
 
 object ReefDebug {
+
     fun init() {
-        if (!FabricLoader.getInstance().isDevelopmentEnvironment) return
+        if (!isDev()) return
 
         /*   UseBlockCallback.EVENT.register() { player, world, hand, hitResult ->
                if (useDebug(player, world, hand, hitResult)) {
@@ -50,4 +50,5 @@ object ReefDebug {
     }
 
     fun Player.info(str: String) = displayClientMessage(literal(str), false)
+
 }

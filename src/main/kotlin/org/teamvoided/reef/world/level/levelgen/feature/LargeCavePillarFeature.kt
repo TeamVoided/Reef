@@ -19,6 +19,7 @@ import kotlin.math.min
 
 class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
     Feature<LargeCavePillarFeatureConfig>(codec) {
+
     override fun place(context: FeaturePlaceContext<LargeCavePillarFeatureConfig>): Boolean {
         val structureWorldAccess = context.level()
         val origin = context.origin()
@@ -173,6 +174,7 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
         fun generateWind(config: LargeCavePillarFeatureConfig): Boolean {
             return this.scale >= config.minRadiusForWind && this.bluntness >= config.minBluntnessForWind.toDouble()
         }
+
     }
 
     internal class WindModifier {
@@ -182,7 +184,7 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
         constructor(y: Int, random: RandomSource, windSpeed: FloatProvider) {
             this.y = y
             val f = windSpeed.sample(random)
-            val g = Mth.randomBetween(random, 0.0f, Math.PI.toFloat())
+            val g = Mth.randomBetween(random, 0f, Math.PI.toFloat()).toDouble()
             this.wind = Vec3((Mth.cos(g) * f).toDouble(), 0.0, (Mth.sin(g) * f).toDouble())
         }
 
@@ -201,13 +203,14 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
         }
 
         companion object {
-            fun create(): WindModifier {
-                return WindModifier()
-            }
+
+            fun create(): WindModifier = WindModifier()
+
         }
     }
 
     companion object {
+
         private fun createGenerator(
             config: LargeCavePillarFeatureConfig,
             pos: BlockPos,
@@ -223,5 +226,6 @@ class LargeCavePillarFeature(codec: Codec<LargeCavePillarFeatureConfig>) :
                 heightScale.sample(random).toDouble()
             )
         }
+
     }
 }

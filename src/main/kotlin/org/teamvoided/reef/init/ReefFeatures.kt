@@ -1,10 +1,10 @@
 package org.teamvoided.reef.init
 
-import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import org.teamvoided.reef.Reef.id
+import org.teamvoided.reef.util.register
 import org.teamvoided.reef.world.level.levelgen.feature.*
 import org.teamvoided.reef.world.level.levelgen.feature.config.*
 
@@ -19,7 +19,10 @@ object ReefFeatures {
     val LARGE_CAVE_PILLAR = register("large_cave_pillar", LargeCavePillarFeature(LargeCavePillarFeatureConfig.CODEC))
     val FEATURE_LIST = register("feature_list", ListFeature(ListFeatureConfig.CODEC))
 
-    fun init() {}
-    private fun <C : FeatureConfiguration?, F : Feature<C>> register(name: String, feature: F): F =
-        Registry.register(BuiltInRegistries.FEATURE, id(name), feature)
+    fun init() = Unit
+
+    fun <C : FeatureConfiguration, F : Feature<C>> register(name: String, feature: F): F {
+        return BuiltInRegistries.FEATURE.register(id(name), feature)
+    }
+
 }

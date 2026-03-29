@@ -1,12 +1,12 @@
 package org.teamvoided.reef.world.level.levelgen.feature
 
 import com.mojang.serialization.Codec
-import net.minecraft.Util
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BlockTags
+import net.minecraft.util.Util
 import net.minecraft.world.RandomizableContainer
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -17,9 +17,11 @@ import net.minecraft.world.level.levelgen.structure.StructurePiece
 import org.teamvoided.reef.Reef.log
 import org.teamvoided.reef.world.level.levelgen.feature.config.ReefMonsterRoomFeatureConfig
 
-@Suppress("DEPRECATION", "ComplexCondition", "MagicNumber")
+// TODO re do this at some point
+@Suppress("DEPRECATION")
 class ReefMonsterRoomFeature(codec: Codec<ReefMonsterRoomFeatureConfig>) :
     Feature<ReefMonsterRoomFeatureConfig>(codec) {
+
     override fun place(context: FeaturePlaceContext<ReefMonsterRoomFeatureConfig>): Boolean {
         val config = context.config()
         var blockPos2: BlockPos
@@ -153,6 +155,5 @@ class ReefMonsterRoomFeature(codec: Codec<ReefMonsterRoomFeatureConfig>) :
         }
         return true
     }
+
 }
-
-

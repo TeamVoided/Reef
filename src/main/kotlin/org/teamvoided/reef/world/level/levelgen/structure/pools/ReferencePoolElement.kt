@@ -22,7 +22,8 @@ import org.teamvoided.reef.init.ReefStructurePoolElementType
 import kotlin.math.max
 
 open class ReferencePoolElement(
-    val templatePool: Holder<StructureTemplatePool>, projection: StructureTemplatePool.Projection,
+    val templatePool: Holder<StructureTemplatePool>,
+    projection: StructureTemplatePool.Projection,
 ) : StructurePoolElement(projection) {
 
     fun template(): StructureTemplatePool = templatePool.value()
@@ -46,14 +47,14 @@ open class ReferencePoolElement(
     override fun getShuffledJigsawBlocks(
         structureTemplateManager: StructureTemplateManager, blockPos: BlockPos,
         rotation: Rotation, randomSource: RandomSource,
-    ): MutableList<StructureTemplate.JigsawBlockInfo> = template().templates.first().first
-        .getShuffledJigsawBlocks(structureTemplateManager, blockPos, rotation, randomSource)
+    ): MutableList<StructureTemplate.JigsawBlockInfo> {
+        return template().templates.first().first
+            .getShuffledJigsawBlocks(structureTemplateManager, blockPos, rotation, randomSource)
+    }
 
 
     override fun getBoundingBox(
-        structureTemplateManager: StructureTemplateManager,
-        blockPos: BlockPos,
-        rotation: Rotation,
+        structureTemplateManager: StructureTemplateManager, blockPos: BlockPos, rotation: Rotation,
     ): BoundingBox {
         val list = template().templates.map { it.first }
             .filter { it !== EmptyPoolElement.INSTANCE }
@@ -77,35 +78,40 @@ open class ReferencePoolElement(
     ): Boolean {
         val random = randomSource.fork()
         random.setSeed(blockPos.asLong())
-        return template().getRandomTemplate(random).place(
-            structureTemplateManager,
-            worldGenLevel,
-            structureManager,
-            chunkGenerator,
-            blockPos,
-            blockPos2,
-            rotation,
-            boundingBox,
-            random,
-            liquidSettings,
-            bl
-        )
+        return template()
+            .getRandomTemplate(random)
+            .place(
+                structureTemplateManager,
+                worldGenLevel,
+                structureManager,
+                chunkGenerator,
+                blockPos,
+                blockPos2,
+                rotation,
+                boundingBox,
+                random,
+                liquidSettings,
+                bl
+            )
     }
 
     override fun getType(): StructurePoolElementType<ReferencePoolElement> = ReefStructurePoolElementType.REFERENCE
+
     override fun setProjection(projection: StructureTemplatePool.Projection): StructurePoolElement {
         super.setProjection(projection)
         return this
     }
 
-    override fun toString(): String = "Reference[${this.templatePool}]"
+    override fun toString(): String = "Reference[${templatePool}]"
 
     companion object {
+
         val CODEC: MapCodec<ReferencePoolElement> = RecordCodecBuilder.mapCodec { instance ->
             instance.group(
                 StructureTemplatePool.CODEC.fieldOf("reference").forGetter { it.templatePool },
                 projectionCodec()
             ).apply(instance, ::ReferencePoolElement)
         }
+
     }
 }
