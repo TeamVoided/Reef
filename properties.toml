@@ -1,0 +1,11 @@
+mod_name = "Reef"
+mod_id = "reef"
+mod_group = "org.teamvoided"
+mod_version = "0.3.0+1.21.11"
+mod_description = "Library that extends vanilla worldgen by providing alternatives to unmodifiable features"
+github_repo = "Teamvoided/Reef"
+discord_invite = "https://discord.gg/KZ5Q364hEg"
+authors = [ "TheEnderCore", "DuskAutumnStorm" ]
+license = "MIT"
+min_minecraft = "1.21.11" # Inclusive
+max_minecraft = "26.1" # Exclusive
